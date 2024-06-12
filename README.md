@@ -1,5 +1,5 @@
 # POO-ProjetoFinal
-Autores:
-Eduardo Bricio
-Gabriel Ramos
-João Vitor Batista Camargos
+## Desenvolvedores:
+### Eduardo Bricio
+#### Gabriel Ramos
+##### João Vitor Batista Camargos
