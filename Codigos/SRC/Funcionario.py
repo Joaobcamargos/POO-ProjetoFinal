@@ -61,6 +61,14 @@ class Funcionario(Pessoa):
         df = pd.concat([df, new_row], ignore_index=True)
         df.to_excel(f'{self.nome}_atividades.xlsx', index=False)
 
+    def ver_atividades_cliente(self, cliente_nome: str) -> None:
+        try:
+            df = pd.read_excel(f'{cliente_nome}_atividades.xlsx')
+            print(f"Histórico de atividades do cliente {cliente_nome}:")
+            print(df)
+        except FileNotFoundError:
+            print(f"Histórico de atividades para o cliente {cliente_nome} não encontrado.")
+
     def mostrar_historico(self) -> None:
         df = pd.read_excel(f'{self.nome}_atividades.xlsx')
         print(df)

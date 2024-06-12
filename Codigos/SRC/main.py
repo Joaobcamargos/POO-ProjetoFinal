@@ -35,6 +35,8 @@ def main():
 
     print("\nHistórico de atividades do funcionário após cliente2:")
     funcionario1.mostrar_historico()
+    print('Funcionario 1 vendo historio do cliente1')
+    funcionario1.ver_atividades_cliente('Ronaldinho')
 
 
 if __name__ == "__main__":
