@@ -3,4 +3,4 @@
 
 #### Eduardo Bricio
 #### Gabriel Ramos
-##### João Vitor Batista Camargos
+#### João Vitor Batista Camargos
