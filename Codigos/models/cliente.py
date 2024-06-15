@@ -61,7 +61,7 @@ class Cliente(Pessoa):
 
     @staticmethod
     def criar_cliente(menu: Type["MenuCliente"]) -> object:
-        from menus.menu_cliente import MenuCliente
+        from Codigos.menus.menu_cliente import MenuCliente
 
         menu = MenuCliente()
         nome1 = input('Nome do cliente: ')

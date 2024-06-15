@@ -82,7 +82,7 @@ class Funcionario(Pessoa):
 
     @staticmethod
     def criar_funcionario(menu: Type["MenuFuncionario"]) -> object:
-        from menus.menu_funcionario import MenuFuncionario
+        from Codigos.menus.menu_funcionario import MenuFuncionario
         menu = MenuFuncionario()
         nome1 = input('Nome do funcionario: ')
         email1 = input('E-mail do funcionario: ')
