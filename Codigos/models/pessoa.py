@@ -1,7 +1,8 @@
+import pandas as pd
 import smtplib
 import email.message
 from abc import ABC, abstractmethod
-
+import os
 
 class Pessoa(ABC):
     def __init__(self, id: str, nome: str, email: str) -> None:
@@ -9,13 +10,12 @@ class Pessoa(ABC):
         self.nome = nome
         self.email = email
 
-
     def enviar_email(self, nome_destino: str, email_destino: str, assunto: str, corpo_email: str) -> None:
         msg = email.message.Message()
         msg['Subject'] = assunto
-        msg['From'] = 'jjoaopoo@gmail.com'  # Substitua pelo seu email
+        msg['From'] = 'jjoaopoo@gmail.com'
         msg['To'] = email_destino
-        password = 'pwpizdopbjoifitb'  # Use a senha de aplicativo gerada no Gmail
+        password = 'pwpizdopbjoifitb'
         msg.add_header('Content-Type', 'text/html')
         msg.set_payload(corpo_email)
 
@@ -28,3 +28,9 @@ class Pessoa(ABC):
     @abstractmethod
     def mostrar_historico(self) -> None:
         pass
+
+    def create_directory(self):
+        if not os.path.exists('database'):
+            os.makedirs('database')
+        if not os.path.exists('database/atividades'):
+            os.makedirs('database/atividades')

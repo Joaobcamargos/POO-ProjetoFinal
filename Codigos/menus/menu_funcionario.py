@@ -1,6 +1,8 @@
-from Codigos.INTERFACES.MenuInterface import MenuI
-from Funcionario import Funcionario
-from Cliente import Cliente
+from Codigos.interfaces.menu_interface import MenuI
+from Codigos.models.funcionario import Funcionario
+from Codigos.models.cliente import Cliente
+from models.cliente_vip import ClienteVIP
+import uuid
 import pandas as pd
 
 class MenuFuncionario(MenuI):
@@ -30,7 +32,7 @@ class MenuFuncionario(MenuI):
                     cliente_nome = input("Digite o nome do cliente para upgrade: ")
                     cliente_email = input("Digite o email do cliente para upgrade: ")
                     try:
-                        df = pd.read_excel('clientes.xlsx')
+                        df = pd.read_excel('database/clientes.xlsx')
                         cliente_id = df.query(f'Nome == "{cliente_nome}" and Email == "{cliente_email}"')['ID'].values[0]
                         cliente = Cliente(cliente_id, cliente_nome, cliente_email)
                         funcionario.enviar_upgrade(cliente)

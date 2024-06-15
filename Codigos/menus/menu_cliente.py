@@ -1,14 +1,13 @@
-from Codigos.INTERFACES.MenuInterface import MenuI
-from Cliente import Cliente
-from Funcionario import Funcionario
+from Codigos.interfaces.menu_interface import MenuI
+from Codigos.models.cliente import Cliente
+from Codigos.models.funcionario import Funcionario
 import uuid
 
-
-
 class MenuCliente(MenuI):
-    def iniciarMenu(self, cliente: Cliente,) -> None:
+    def iniciarMenu(self, cliente: Cliente) -> None:
         b = True
         FuncionarioBase = Funcionario(str(uuid.uuid4()), 'Funcionário Base', 'base@empresa.com')
+
         while b:
             print(f'Olá, {cliente.nome}!')
             print('Digite 1 para solicitar uma fatura')
@@ -23,7 +22,7 @@ class MenuCliente(MenuI):
                 case 2:
                     cliente.solicitar_recibo(FuncionarioBase)
                 case 3:
-                    cliente.mostrar_historico(FuncionarioBase)
+                    cliente.mostrar_historico()
                 case 0:
                     print("Saindo do menu...")
                     b = False
