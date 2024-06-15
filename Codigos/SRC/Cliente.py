@@ -1,10 +1,11 @@
 
 from Pessoa import Pessoa
 import pandas as pd
-
+from typing import Type
+import uuid
 class Cliente(Pessoa):
-    def __init__(self, id: str, nome: str, email: str, telefone: str, idade: int, data_de_cadastro: str) -> None:
-        super().__init__(id, nome, email, telefone, idade, data_de_cadastro)
+    def __init__(self, id: str, nome: str, email: str) -> None:
+        super().__init__(id, nome, email)
         self.atividades = []  # Lista para registrar atividades
         self.add_to_global_db()
         self.create_personal_db()
@@ -56,6 +57,25 @@ class Cliente(Pessoa):
     def solicitar_upgrade(self, funcionario) -> None:
         self.registrar_atividade('Solicitou Upgrade')
         return funcionario.enviar_upgrade(self)
+
+    @staticmethod
+    def criar_cliente(menu: Type["MenuCliente"],) -> object:
+        """
+        Cria um novo cliente e inicia o menu do cliente.
+
+        Args:
+            menu (MenuCliente): Menu para interagir com o cliente.
+
+        Returns:
+            Cliente: Instância do cliente criado.
+        """
+        from MenuCliente import MenuCliente
+        menu = MenuCliente()
+        nome1 = input('Nome do cliente: ')
+        email1 = input('E-mail do cliente: ')
+        cliente1 = Cliente(str(uuid.uuid4()), nome1, email1)
+        menu.iniciarMenu(cliente1)
+        return cliente1
 
     def mostrar_historico(self) -> None:
         df = pd.read_excel(f'{self.nome}_atividades.xlsx')
