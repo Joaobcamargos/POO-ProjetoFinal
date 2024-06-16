@@ -5,6 +5,11 @@ import uuid
 
 class MenuCliente(MenuI):
     def iniciarMenu(self, cliente: Cliente) -> None:
+        """
+        Inicia o menu de interações para o cliente.
+        Args:
+            cliente (Cliente): Instância do cliente que está utilizando o menu.
+        """
         b = True
         FuncionarioBase = Funcionario(str(uuid.uuid4()), 'Funcionário Base', 'base@empresa.com')
 
@@ -15,7 +20,7 @@ class MenuCliente(MenuI):
             print('Digite 3 para verificar seu histórico')
             print('Digite 0 para sair')
 
-            caso = int(input())
+            caso = int(input())  # Input do usuário para selecionar uma opção
             match caso:
                 case 1:
                     cliente.solicitar_fatura(FuncionarioBase)

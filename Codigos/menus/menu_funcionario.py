@@ -1,12 +1,16 @@
 from Codigos.interfaces.menu_interface import MenuI
 from Codigos.models.funcionario import Funcionario
 from Codigos.models.cliente import Cliente
-from models.cliente_vip import ClienteVIP
 import uuid
 import pandas as pd
 
 class MenuFuncionario(MenuI):
     def iniciarMenu(self, funcionario: Funcionario) -> None:
+        """
+        Inicia o menu de interações para o funcionário.
+        Args:
+            funcionario (Funcionario): Instância do funcionário que está utilizando o menu.
+        """
         b = True
         while b:
             print(f'Olá, {funcionario.nome}!')
@@ -17,7 +21,7 @@ class MenuFuncionario(MenuI):
             print('Digite 5 para enviar um upgrade')
             print('Digite 0 para sair')
 
-            caso = int(input())
+            caso = int(input())  # Entrada do usuário para selecionar uma opção
             match caso:
                 case 1:
                     funcionario.verificar_clientes()
