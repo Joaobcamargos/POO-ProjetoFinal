@@ -5,6 +5,9 @@ from menus.menu_cliente import MenuCliente
 from menus.menu_funcionario import MenuFuncionario
 
 def main():
+    """
+    Criando algumas instâncias iniciais(opcional) e inicia os menus a partir da entrada
+    """
     Funcionario1 = Funcionario(str(uuid.uuid4()), 'João', 'dautonico32@gmail.com')
     Cliente1 = Cliente(str(uuid.uuid4()), 'Marcos', 'joaovitorbatista12337@gmail.com')
     Cliente1.solicitar_fatura(Funcionario1)
