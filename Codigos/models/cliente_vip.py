@@ -7,7 +7,28 @@ class ClienteVIP(Cliente):
         self.status = "VIP"
         self.add_to_global_db()
 
+    def mostrar_historico(self) -> None:
+        """
+        Mostra o histórico de atividades do cliente VIP.
+        """
+        super().mostrar_historico()
+
+    def acesso_exclusivo(self) -> None:
+        """
+        Informa que o cliente VIP tem acesso exclusivo.
+        """
+        print(f"{self.nome} tem acesso exclusivo!")
+
+    def atendimento_prioritario(self) -> None:
+        """
+        Informa que o cliente VIP tem atendimento prioritário.
+        """
+        print(f"{self.nome} tem atendimento prioritário!")
+
     def add_to_global_db(self) -> None:
+        """
+        Adiciona o cliente VIP ao banco de dados global de clientes VIPs.
+        """
         self.create_directory()
         try:
             df = pd.read_excel('database/clientes_vip.xlsx')
