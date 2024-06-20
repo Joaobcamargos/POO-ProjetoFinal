@@ -1,9 +1,11 @@
-
 import pandas as pd
 import uuid
 from .pessoa import Pessoa
 from .cliente_vip import ClienteVIP
 from typing import Type
+
+
+
 class Funcionario(Pessoa):
     def __init__(self, id: str, nome: str, email: str) -> None:
         """
@@ -51,7 +53,6 @@ class Funcionario(Pessoa):
         cliente.remove_from_global_db()
         cliente_vip = ClienteVIP(cliente)
         cliente_vip.add_to_global_db()
-
         cliente_vip.update_personal_db('Tornou-se VIP')
         print(f"{cliente.nome} foi promovido a cliente VIP!")
         return cliente_vip
@@ -131,20 +132,22 @@ class Funcionario(Pessoa):
         except FileNotFoundError:
             print("Banco de dados de clientes VIPs não encontrado.")
 
-    @staticmethod
-    def criar_funcionario(menu: Type["MenuFuncionario"]) -> object:
+
+
+    def criar_funcionario() -> object:
         """
         Cria um novo funcionário e inicia o menu de funcionário.
-        Args:
-            menu (Type[MenuFuncionario]): Classe do menu de funcionário.
+        Importando a biblioteca dentro do método para evitar bug de importação circular.
         Returns:
             Funcionario: Novo funcionário criado.
         """
         from Codigos.menus.menu_funcionario import MenuFuncionario
-        menu = MenuFuncionario()
         nome1 = input('Nome do funcionario: ')
         email1 = input('E-mail do funcionario: ')
+        while not Funcionario.validar_email(email1) or Funcionario.email_existe(email1):
+            email1 = input('Você digitou um email com a formatação errada ou um email já existente. Por favor, digite um novo email: ')
         funcionario1 = Funcionario(str(uuid.uuid4()), nome1, email1)
+        menu=MenuFuncionario()
         menu.iniciarMenu(funcionario1)
         return funcionario1
 
@@ -152,5 +155,5 @@ class Funcionario(Pessoa):
         """
         Mostra o histórico de atividades do funcionário.
         """
-        df = pd.read_excel(f'database/atividades/{self.nome}_atividades.xlsx')
+        df = pd.readexcel(f'database/atividades/{self.nome}_atividades.xlsx')
         print(df)

@@ -15,12 +15,18 @@ class MenuCliente(MenuI):
 
         while b:
             print(f'Olá, {cliente.nome}!')
-            print('Digite 1 para solicitar uma fatura')
-            print('Digite 2 para solicitar um recibo')
-            print('Digite 3 para verificar seu histórico')
-            print('Digite 0 para sair')
+            print('Escolha uma das opções: \n')
+            print('1 - Solicitar uma fatura')
+            print('2 - Solicitar um recibo')
+            print('3 - Verificar seu histórico')
+            print('0 - Sair')
 
-            caso = int(input())  # Input do usuário para selecionar uma opção
+            try:
+                caso = int(input())  # Input do usuário para selecionar uma opção
+            except ValueError:
+                print('Opção inválida. Por favor, digite novamente.')
+                continue
+
             match caso:
                 case 1:
                     cliente.solicitar_fatura(FuncionarioBase)

@@ -3,6 +3,7 @@ import uuid
 from .pessoa import Pessoa
 from typing import Type
 
+
 class Cliente(Pessoa):
     def __init__(self, id: str, nome: str, email: str) -> None:
         """
@@ -103,23 +104,21 @@ class Cliente(Pessoa):
         self.registrar_atividade('Solicitou Upgrade')
         return funcionario.enviar_upgrade(self)
 
-    @staticmethod
-    def criar_cliente(menu: Type["MenuCliente"]) -> object:
+
+    def criar_cliente() -> object:
         """
         Cria um novo cliente e inicia o menu de cliente.
-        Args:
-            menu (Type[MenuCliente]): Classe do menu de cliente.
+        Importando a biblioteca dentro do método para evitar bug de importação circular.
         Returns:
             Cliente: Novo cliente criado.
         """
         from Codigos.menus.menu_cliente import MenuCliente
-
-        menu = MenuCliente()
         nome1 = input('Nome do cliente: ')
         email1 = input('E-mail do cliente: ')
-        while email1.count('@') != 1:
-            email1 = input('Caracteres inválidos. Coloque apenas 1 arroba. E-mail do cliente: ')
+        while not Cliente.validar_email(email1) or Cliente.email_existe(email1):
+            email1 = input('Você digitou um email com a formatação errada ou um email já existente. Por favor, digite um novo email: ')
         cliente1 = Cliente(str(uuid.uuid4()), nome1, email1)
+        menu=MenuCliente()
         menu.iniciarMenu(cliente1)
         return cliente1
 

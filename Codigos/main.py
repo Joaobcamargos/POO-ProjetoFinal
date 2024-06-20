@@ -1,24 +1,36 @@
 import uuid
 from models.cliente import Cliente
 from models.funcionario import Funcionario
-from menus.menu_cliente import MenuCliente
-from menus.menu_funcionario import MenuFuncionario
+
+
 
 def main():
     """
-    Criando algumas instâncias iniciais(opcional) e inicia os menus a partir da entrada
+    Criando algumas instâncias iniciais e iniciando os menus
     """
-    Funcionario1 = Funcionario(str(uuid.uuid4()), 'João', 'dautonico32@gmail.com')
-    Cliente1 = Cliente(str(uuid.uuid4()), 'Marcos', 'joaovitorbatista12337@gmail.com')
-    Cliente1.solicitar_fatura(Funcionario1)
-    Cliente2 = Cliente(str(uuid.uuid4()), 'Joaquim', 'email.com')
+    try:
+        Funcionario1 = Funcionario(str(uuid.uuid4()), 'João', 'dautonico32@gmail.com')
+        Cliente1 = Cliente(str(uuid.uuid4()), 'Marcos', 'joaovitorbatista12337@gmail.com')
+        Cliente1.solicitar_fatura(Funcionario1)
+        Cliente2 = Cliente(str(uuid.uuid4()), 'Joaquim', 'joaquim@example.com')
 
-    a = int(input('Digite 1 se quer testar Cliente ou 2 para testar funcionario'))
-    match a:
-        case 1:
-            Cliente.criar_cliente(MenuCliente)
-        case 2:
-            Funcionario.criar_funcionario(MenuFuncionario)
+        while True:
+            print("Digite 1 para testar Cliente ou 2 para testar Funcionario, 0 para sair:")
+            try:
+                choice = int(input())
+                if choice == 1:
+                    Cliente.criar_cliente()
+                elif choice == 2:
+                    Funcionario.criar_funcionario()
+                elif choice == 0:
+                    print("Encerrando o programa.")
+                    break
+                else:
+                    print("Opção inválida. Tente novamente.")
+            except ValueError:
+                print("Entrada inválida. Por favor, digite um número.")
+    except Exception as e:
+        print(f"Ocorreu um erro: {e}")
 
 if __name__ == "__main__":
     main()

@@ -3,6 +3,7 @@ import smtplib
 import email.message
 from abc import ABC, abstractmethod
 import os
+import re
 
 class Pessoa(ABC):
     def __init__(self, id: str, nome: str, email: str) -> None:
@@ -58,3 +59,37 @@ class Pessoa(ABC):
             os.makedirs('database')
         if not os.path.exists('database/atividades'):
             os.makedirs('database/atividades')
+
+    def validar_email(email: str) -> bool:
+        """
+        Valida se o email tem a formatação correta.
+        Args:
+            email (str): Email a ser validado.
+        Returns:
+            bool: True se o email é válido, False caso contrário.
+        """
+        padrao = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+        return re.match(padrao, email) is not None
+
+    def email_existe(email: str) -> bool:
+        """
+        Verifica se o email já existe no banco de dados de clientes ou funcionários.
+        Args:
+            email (str): Email a ser verificado.
+        Returns:
+            bool: True se o email já existe, False caso contrário.
+        """
+        arquivos = ['database/clientes.xlsx', 'database/funcionarios.xlsx']
+
+        for arquivo in arquivos:
+            try:
+                df = pd.read_excel(arquivo)
+                if email in df['Email'].values:
+                    return True
+            except FileNotFoundError:
+                print(f"Arquivo {arquivo} não encontrado.")
+            except Exception as e:
+                print(f"Erro ao ler o arquivo {arquivo}: {e}")
+
+        return False
+

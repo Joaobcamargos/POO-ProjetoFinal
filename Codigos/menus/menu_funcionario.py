@@ -5,34 +5,38 @@ import uuid
 import pandas as pd
 
 class MenuFuncionario(MenuI):
+
     def iniciarMenu(self, funcionario: Funcionario) -> None:
         """
-        Inicia o menu de interações para o funcionário.
+        Inicia o menu de funcionário.
         Args:
-            funcionario (Funcionario): Instância do funcionário que está utilizando o menu.
+            funcionario (Funcionario): Funcionário para o qual o menu será iniciado.
         """
         b = True
         while b:
             print(f'Olá, {funcionario.nome}!')
-            print('Digite 1 para ver o banco de dados dos clientes')
-            print('Digite 2 para ver o banco de dados dos clientes Vips')
-            print('Digite 3 para ver a atividade de um cliente específico')
-            print('Digite 4 para ver seu histórico')
-            print('Digite 5 para enviar um upgrade')
-            print('Digite 0 para sair')
+            print('Escolha uma das opções: \n')
+            print('1 - Ver atividades do cliente')
+            print('2 - Ver banco de dados de clientes')
+            print('3 - Ver banco de dados de clientes VIPs')
+            print('4 - Solicitar upgrade de cliente para VIP')
+            print('0 - Sair')
 
-            caso = int(input())  # Entrada do usuário para selecionar uma opção
-            match caso:
+            try:
+                op = int(input())
+            except ValueError:
+                print('Opção inválida. Por favor, digite novamente.')
+                continue
+
+            match op:
                 case 1:
-                    funcionario.verificar_clientes()
+                    cliente_nome = input("Digite o nome do cliente para ver as atividades: ")
+                    funcionario.ver_atividades_cliente(cliente_nome)
                 case 2:
-                    funcionario.verificar_clientes_vips()
+                    funcionario.verificar_clientes()
                 case 3:
-                    a = input("Digite o nome do cliente: ")
-                    funcionario.ver_atividades_cliente(a)
+                    funcionario.verificar_clientes_vips()
                 case 4:
-                    funcionario.mostrar_historico()
-                case 5:
                     cliente_nome = input("Digite o nome do cliente para upgrade: ")
                     cliente_email = input("Digite o email do cliente para upgrade: ")
                     try:
