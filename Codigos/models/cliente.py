@@ -2,9 +2,9 @@ import pandas as pd
 import uuid
 from .pessoa import Pessoa
 from typing import Type
+from Codigos.interfaces.cliente_interface import ClienteI
 
-
-class Cliente(Pessoa):
+class Cliente(Pessoa,ClienteI):
     def __init__(self, id: str, nome: str, email: str) -> None:
         """
         Inicializa o cliente, adiciona ao banco de dados global e cria o banco de dados pessoal.

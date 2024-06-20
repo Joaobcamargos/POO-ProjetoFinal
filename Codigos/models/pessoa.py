@@ -2,10 +2,11 @@ import pandas as pd
 import smtplib
 import email.message
 from abc import ABC, abstractmethod
+from Codigos.interfaces.pessoa_interface import PessoaI
 import os
 import re
 
-class Pessoa(ABC):
+class Pessoa(PessoaI,ABC):
     def __init__(self, id: str, nome: str, email: str) -> None:
         """
         Inicializa a classe base Pessoa.

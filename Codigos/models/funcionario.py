@@ -3,10 +3,10 @@ import uuid
 from .pessoa import Pessoa
 from .cliente_vip import ClienteVIP
 from typing import Type
+from Codigos.interfaces.funcionario_interface import FuncionarioI
 
 
-
-class Funcionario(Pessoa):
+class Funcionario(Pessoa,FuncionarioI):
     def __init__(self, id: str, nome: str, email: str) -> None:
         """
         Inicializa o funcionário e adiciona ao banco de dados global e cria o banco de dados pessoal.
